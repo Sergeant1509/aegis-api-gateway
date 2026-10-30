@@ -1,0 +1,6 @@
+{
+  "routes": [
+    {"path_prefix": "/catalog/", "upstream": "http://catalog:8081", "strip_prefix": false},
+    {"path_prefix": "/orders/", "upstream": "http://orders:8082", "strip_prefix": false}
+  ]
+}
