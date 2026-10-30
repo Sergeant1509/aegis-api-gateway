@@ -1,0 +1,21 @@
+services:
+  gateway:
+    build: .
+    environment:
+      AEGIS_API_KEY: ${AEGIS_API_KEY:?Set AEGIS_API_KEY in your environment}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - catalog
+      - orders
+    restart: unless-stopped
+
+  catalog:
+    image: hashicorp/http-echo:1.0.0
+    command: ["-listen=:8081", "-text=catalog upstream"]
+    expose: ["8081"]
+
+  orders:
+    image: hashicorp/http-echo:1.0.0
+    command: ["-listen=:8082", "-text=orders upstream"]
+    expose: ["8082"]
